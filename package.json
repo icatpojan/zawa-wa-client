@@ -1,0 +1,14 @@
+{
+    "name": "api-wa-proxy",
+    "version": "1.0.0",
+    "description": "WhatsApp API Proxy & One-Endpoint Service: Clean proxy for Zawa API (zawa-proxy.js) and simple one-endpoint WhatsApp sender (wa-sender.js) with auto session management.",
+    "main": "zawa-proxy.js",
+    "scripts": {
+        "start": "node zawa-proxy.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "axios": "^1.6.7",
+        "cors": "^2.8.5"
+    }
+}

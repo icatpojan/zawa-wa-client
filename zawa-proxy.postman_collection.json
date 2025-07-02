@@ -1,0 +1,514 @@
+{
+    "info": {
+        "_postman_id": "api-wa-proxy-collection-001",
+        "name": "API WA Proxy",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authorize",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/api/authorize",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "authorize"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Success",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/api/authorize",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "authorize"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n  \"status\": \"success\",\n  \"message\": \"Successfully obtained authorize token\",\n  \"data\": {\n    \"id\": \"...\",\n    \"sessionId\": \"...\",\n    \"expiredAt\": \"2024-06-13T15:00:00.000Z\"\n  }\n}"
+                }
+            ]
+        },
+        {
+            "name": "Get QR Code",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "id",
+                        "value": "your_id",
+                        "type": "text"
+                    },
+                    {
+                        "key": "session-id",
+                        "value": "your_session_id",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://localhost:3000/api/qrcode",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "qrcode"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Success",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/api/qrcode",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "qrcode"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n  \"status\": \"success\",\n  \"message\": \"Successfully obtained QR code\",\n  \"data\": {\n    \"qrcode\": \"data:image/png;base64,iVBORw0KGgoAAAANS...\"\n  }\n}"
+                }
+            ]
+        },
+        {
+            "name": "Send Message (All Types)",
+            "item": [
+                {
+                    "name": "Text Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string, WhatsApp number in international format\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'text'\n  \"type\": \"text\",\n  // text: string, message content\n  \"text\": \"Hello from Zawa 👋\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Image Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'image'\n  \"type\": \"image\",\n  // image: object\n  \"image\": {\n    // url: string, direct link to image\n    \"url\": \"https://example.com/image.jpg\",\n    // thumbnail: string, direct link to thumbnail (optional)\n    \"thumbnail\": \"https://example.com/thumb.jpg\",\n    // mimetype: string, e.g. 'image/jpeg'\n    \"mimetype\": \"image/jpeg\"\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Video Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'video'\n  \"type\": \"video\",\n  // video: object\n  \"video\": {\n    // url: string, direct link to video\n    \"url\": \"https://example.com/video.mp4\",\n    // thumbnail: string, direct link to thumbnail (optional)\n    \"thumbnail\": \"https://example.com/thumb.jpg\",\n    // duration: number, video duration in seconds\n    \"duration\": 12,\n    // mimetype: string, e.g. 'video/mp4'\n    \"mimetype\": \"video/mp4\"\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Audio Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'audio'\n  \"type\": \"audio\",\n  // audio: object\n  \"audio\": {\n    // url: string, direct link to audio\n    \"url\": \"https://example.com/audio.mp3\",\n    // duration: number, audio duration in seconds\n    \"duration\": 8,\n    // mimetype: string, e.g. 'audio/mpeg'\n    \"mimetype\": \"audio/mpeg\"\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Document Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'document'\n  \"type\": \"document\",\n  // document: object\n  \"document\": {\n    // url: string, direct link to file\n    \"url\": \"https://example.com/file.pdf\",\n    // name: string, file name\n    \"name\": \"brosur.pdf\",\n    // size: number, file size in bytes\n    \"size\": 500000,\n    // mimetype: string, e.g. 'application/pdf'\n    \"mimetype\": \"application/pdf\"\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Location Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'location'\n  \"type\": \"location\",\n  // location: object\n  \"location\": {\n    // name: string, location name\n    \"name\": \"Zawa HQ\",\n    // address: string, location address\n    \"address\": \"Jl. Teknologi No. 123\",\n    // latitude: number\n    \"latitude\": -6.2,\n    // longitude: number\n    \"longitude\": 106.816666\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Contact Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "id",
+                                "value": "your_id",
+                                "type": "text"
+                            },
+                            {
+                                "key": "session-id",
+                                "value": "your_session_id",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  // phone: string\n  \"phone\": \"6281234567890\",\n  // type: string, must be 'contact'\n  \"type\": \"contact\",\n  // contact: object\n  \"contact\": {\n    // name: string, contact name\n    \"name\": \"Azickri\",\n    // phone: string, contact phone number\n    \"phone\": \"628111111111\"\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/api/message",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "message"
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Success",
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Message sent successfully\",\n  \"data\": {\n    \"messageId\": \"...\"\n  }\n}"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

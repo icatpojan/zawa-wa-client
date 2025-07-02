@@ -122,4 +122,11 @@ Special thanks to **azickri** for creating [Zawa](https://api-zawa.azickri.com)!
 
 ---
 
+## Notes
+- The QR code string (base64) returned by the API can be easily viewed as an image using this tool: https://jaredwinick.github.io/base64-image-viewer/
+- `id` and `sessionId` are only valid for 24 hours (see `expiredAt` field)
+- Make sure headers and body are correct for a successful request
+
+---
+
 Made with ❤️ by the open source community 
